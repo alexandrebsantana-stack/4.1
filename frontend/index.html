@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Chamados | SENAI Candeias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <h1 class="brand">Sistema de Chamados</h1>
+      <span class="badge">SENAI Candeias</span>
+    </div>
+  </header>
+
+  <main class="container main">
+    <section class="card form-card">
+      <h2 class="section-title" id="form-title">Abrir novo chamado</h2>
+      <form id="chamado-form">
+        <div class="form-grid">
+          <div class="field">
+            <label for="titulo">Titulo <span class="req">*</span></label>
+            <input type="text" id="titulo" name="titulo" placeholder="Ex.: Computador não liga" required>
+          </div>
+          <div class="field">
+            <label for="solicitante">Solicitante <span class="req">*</span></label>
+            <input type="text" id="solicitante" name="solicitante" placeholder="Ex.: Maria Souza" required>
+          </div>
+          <div class="field">
+            <label for="prioridade">Prioridade</label>
+            <select id="prioridade" name="prioridade">
+              <option value="baixa">Baixa</option>
+              <option value="media" selected>Média</option>
+              <option value="alta">Alta</option>
+              <option value="urgente">Urgente</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="status">Status</label>
+            <select id="status" name="status">
+              <option value="aberto" selected>Aberto</option>
+              <option value="em_andamento">Em andamento</option>
+              <option value="resolvido">Resolvido</option>
+              <option value="fechado">Fechado</option>
+            </select>
+          </div>
+          <div class="field field-full">
+            <label for="descricao">Descrição</label>
+            <textarea id="descricao" name="descricao" rows="3" placeholder="Descreva o problema ou solicitação..."></textarea>
+          </div>
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary" id="btn-submit">Abrir chamado</button>
+          <button type="button" class="btn btn-secondary" id="btn-cancel" hidden>Cancelar edição</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="card table-card">
+      <div class="table-header">
+        <h2 class="section-title">Chamados cadastrados</h2>
+        <div class="filters">
+          <input type="text" id="busca" placeholder="Buscar por título, solicitante ou status...">
+          <button class="btn btn-secondary" id="btn-refresh">Atualizar</button>
+        </div>
+      </div>
+      <div id="loading" class="loading">Carregando chamados...</div>
+      <div id="error-box" class="error-box" hidden></div>
+      <div class="table-wrapper">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Título</th>
+              <th>Solicitante</th>
+              <th>Prioridade</th>
+              <th>Status</th>
+              <th>Data</th>
+              <th class="col-actions">Ações</th>
+            </tr>
+          </thead>
+          <tbody id="chamados-tbody"></tbody>
+        </table>
+      </div>
+      <div id="empty-state" class="empty-state" hidden>
+        Nenhum chamado encontrado. Abra um novo chamado para começar!
+      </div>
+    </section>
+  </main>
+
+  <div id="modal" class="modal" hidden>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-title">Detalhes do chamado</h3>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <div id="modal-body" class="modal-body"></div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" id="modal-cancel">Fechar</button>
+        <button class="btn btn-primary" id="modal-edit">Editar</button>
+        <button class="btn btn-danger" id="modal-delete">Excluir</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
